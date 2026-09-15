@@ -51,4 +51,4 @@ class Ticket(TimeStampedModel):
         ordering = ["performance", "row", "seat"]
 
     def __str__(self):
-        return f"Ticket ID: {self.id}, Performance: {self.performance.id}, Row: {self.row}, Seat: {self.seat}"
+        return f"Ticket ID: {self.id}, Performance: {self.performance}, Row: {self.row}, Seat: {self.seat}"
