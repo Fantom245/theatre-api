@@ -1,3 +1,12 @@
-from django.shortcuts import render
+from rest_framework import viewsets
 
-# Create your views here.
+from .models import Play
+from .serializers import PlaySerializer
+
+
+class PlayViewSet(viewsets.ModelViewSet):
+    queryset = Play.objects.prefetch_related(
+        "actors",
+        "genres"
+    )
+    serializer_class = PlaySerializer

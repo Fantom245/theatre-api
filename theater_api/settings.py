@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "ticket",
     "theatrehall",
     "users",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
