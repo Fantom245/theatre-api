@@ -1,5 +1,7 @@
 from django.db import models
 
+from .validators import name_validator, genre_name_validator
+
 
 class TimeStampedModel(models.Model):
     created_at = models.DateTimeField(
@@ -19,12 +21,14 @@ class Actor(TimeStampedModel):
     first_name = models.CharField(
         max_length=100,
         db_index=True,
-        help_text="Actor first name"
+        help_text="Actor first name",
+        validators=[name_validator]
     )
     last_name = models.CharField(
         max_length=100,
         db_index=True,
-        help_text="Actor last name"
+        help_text="Actor last name",
+        validators=[name_validator]
     )
 
     class Meta:
@@ -48,7 +52,8 @@ class Genre(TimeStampedModel):
     name = models.CharField(
         max_length=100,
         unique=True,
-        help_text="Genre name"
+        help_text="Genre name",
+        validators=[genre_name_validator]
     )
 
     class Meta:
@@ -67,6 +72,7 @@ class Play(TimeStampedModel):
         help_text="Play title"
     )
     description = models.TextField(
+        max_length=2000,
         blank=True,
         help_text="Play description"
     )
