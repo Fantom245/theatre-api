@@ -10,9 +10,8 @@ class ActorSerializer(serializers.ModelSerializer):
         read_only_fields = ["id", "created_at", "updated_at"]
 
 
-class ActorListSerializer(serializers.ModelSerializer):
-    class Meta:
-            model = Actor
+class ActorListSerializer(ActorSerializer):
+    class Meta(ActorSerializer.Meta):
             fields = ["id", "first_name", "last_name"]
             read_only_fields = ["id"]
 
@@ -24,9 +23,8 @@ class GenreSerializer(serializers.ModelSerializer):
         read_only_fields = ["id", "created_at", "updated_at"]
 
 
-class GenreListSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Genre
+class GenreListSerializer(GenreSerializer):
+    class Meta(GenreSerializer.Meta):
         fields = ["id", "name"]
         read_only_fields = ["id"]
 
@@ -55,3 +53,12 @@ class PlaySerializer(serializers.ModelSerializer):
         model = Play
         fields = ["id", "title", "description", "actors", "genres", "actors_ids", "genres_ids", "created_at", "updated_at"]
         read_only_fields = ["id", "created_at", "updated_at"]
+
+
+class PlayListSerializer(PlaySerializer):
+    actors = ActorListSerializer(many=True, read_only=True)
+    genres = GenreListSerializer(many=True, read_only=True)
+
+    class Meta(PlaySerializer.Meta):
+        fields = ["id", "title", "description", "actors", "genres"]
+        read_only_fields = ["id"]

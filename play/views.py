@@ -1,7 +1,14 @@
 from rest_framework import viewsets
 
 from .models import Play, Actor, Genre
-from .serializers import PlaySerializer, ActorSerializer, ActorListSerializer, GenreSerializer, GenreListSerializer
+from .serializers import (
+    PlaySerializer,
+    PlayListSerializer,
+    ActorSerializer,
+    ActorListSerializer,
+    GenreSerializer,
+    GenreListSerializer
+)
 
 
 class ActorViewSet(viewsets.ModelViewSet):
@@ -27,4 +34,8 @@ class PlayViewSet(viewsets.ModelViewSet):
         "actors",
         "genres"
     )
-    serializer_class = PlaySerializer
+
+    def get_serializer_class(self):
+        if self.action == "list":
+            return PlayListSerializer
+        return PlaySerializer
