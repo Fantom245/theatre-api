@@ -8,3 +8,9 @@ class TheatreHallSerializer(serializers.ModelSerializer):
         model = TheatreHall
         fields = ["id", "name", "rows", "seats_in_row", "total_seats", "created_at", "updated_at"]
         read_only_fields = ["id", "total_seats", "created_at", "updated_at"]
+
+
+class TheatreHallListSerializer(serializers.ModelSerializer):
+    class Meta(TheatreHallSerializer.Meta):
+        fields = ["id", "name", "rows", "seats_in_row", "total_seats"]
+        read_only_fields = ["id", "total_seats"]

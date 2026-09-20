@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 
 from .models import Reservation, Ticket
-from .serializers import ReservationSerializer, TicketSerializer
+from .serializers import ReservationSerializer, TicketSerializer, TicketListSerializer
 
 
 class ReservationViewSet(viewsets.ModelViewSet):
@@ -11,4 +11,8 @@ class ReservationViewSet(viewsets.ModelViewSet):
 
 class TicketViewSet(viewsets.ModelViewSet):
     queryset = Ticket.objects.all()
-    serializer_class = TicketSerializer
+
+    def get_serializer_class(self):
+        if self.action == "list":
+            return TicketListSerializer
+        return TicketSerializer

@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 
 from .models import Performance
-from .serializers import PerformanceSerializer
+from .serializers import PerformanceSerializer, PerformanceListSerializer
 
 
 class PerformanceViewSet(viewsets.ModelViewSet):
@@ -9,5 +9,9 @@ class PerformanceViewSet(viewsets.ModelViewSet):
         "play",
         "theatre_hall"
     )
-    serializer_class = PerformanceSerializer
+
+    def get_serializer_class(self):
+        if self.action == "list":
+            return PerformanceListSerializer
+        return PerformanceSerializer
 

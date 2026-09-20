@@ -3,7 +3,8 @@ from django.contrib.auth import get_user_model
 
 from .models import Reservation, Ticket
 from performance.models import Performance
-from performance.serializers import PlayShortSerializer, TheatreHallShortSerializer
+from performance.serializers import PlayShortSerializer
+from theatrehall.serializers import TheatreHallListSerializer
 
 
 class UserShortSerializer(serializers.ModelSerializer):
@@ -14,7 +15,7 @@ class UserShortSerializer(serializers.ModelSerializer):
 
 class PerformanceShortSerializer(serializers.ModelSerializer):
     play = PlayShortSerializer(read_only=True)
-    theatre_hall = TheatreHallShortSerializer(read_only=True)
+    theatre_hall = TheatreHallListSerializer(read_only=True)
 
     class Meta:
         model = Performance
@@ -56,3 +57,9 @@ class TicketSerializer(serializers.ModelSerializer):
         model = Ticket
         fields = ["id", "row", "seat", "performance", "reservation", "performance_id", "reservation_id", "created_at", "updated_at"]
         read_only_fields = ["id", "created_at", "updated_at"]
+
+
+class TicketListSerializer(TicketSerializer):
+    class Meta(TicketSerializer.Meta):
+        fields = ["id", "row", "seat", "performance", "reservation"]
+        read_only_fields = ["id"]
