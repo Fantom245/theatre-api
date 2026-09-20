@@ -1,3 +1,13 @@
-from django.shortcuts import render
+from rest_framework import viewsets
 
-# Create your views here.
+from .models import User
+from .serializers import UserListSerializer, UserSerializer
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+
+    def get_serializer_class(self):
+        if self.action == "list":
+            return UserListSerializer
+        return UserSerializer
