@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}
+    "Plays list"
+{% endblock %}
+
+{% block content %}
+    <h1>Plays list</h1>
+    {% for play in plays %}
+        <h2>
+            <a href="{% url 'play-detail' play.pk %}">
+                {{ play.title }}
+            </a>
+        </h2>
+        <p>{{ play.description|truncatechars:53 }}</p>
+    {% endfor %}
+{% endblock %}

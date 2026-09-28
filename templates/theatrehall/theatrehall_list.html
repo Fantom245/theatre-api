@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}
+    "Theatrehall list"
+{% endblock %}
+
+{% block content %}
+    <h1>Theatrehall list</h1>
+    {% for theatrehall in theatrehalls %}
+        <h2>{{ theatrehall.name }}</h2>
+        <p>{{ theatrehall.rows }} {{ theatrehall.seats_in_row }}</p>
+    {% endfor %}
+{% endblock %}

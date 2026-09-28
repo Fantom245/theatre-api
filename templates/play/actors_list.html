@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}
+    "Actors list"
+{% endblock %}
+
+{% block content %}
+    <h1>Cast list</h1>
+    {% for actor in actors %}
+        <h2>
+            <a href="{% url 'actor-detail' actor.pk %}">
+                {{ actor.first_name }} {{ actor.last_name }}
+            </a>
+        </h2>
+    {% endfor %}
+{% endblock %}
